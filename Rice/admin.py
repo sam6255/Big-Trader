@@ -14,11 +14,11 @@ class Rice_Admin(admin.ModelAdmin):
     form = Rice_buy_order_form
     # 筛选条件
     list_filter = ['put_date', 'get_rice_ratio', 'get_package']
-    list_display = ['id', 'put_date', 'order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'get_rice_amount',
+    list_display = ['put_date', 'order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'get_rice_amount',
                     'lux_amount',
                     'lux_price', 'get_lux_amount', 'big_amount', 'big_price', 'get_big_amount', 'other_money',
                     'get_total_amount', 'stock_amount', 'mark']
-    list_display_links = ['id']
+    list_display_links = ['put_date']
     list_per_page = 20
     list_editable = ['order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'lux_amount', 'lux_price',
                      'big_amount', 'big_price', 'other_money', 'stock_amount', 'mark']
