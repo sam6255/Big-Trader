@@ -14,11 +14,11 @@ class Rice_Admin(admin.ModelAdmin):
     form = Rice_buy_order_form
     # 筛选条件
     list_filter = ['put_date', 'get_rice_ratio', 'get_package']
-    list_display = ['put_date', 'order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'get_rice_amount',
+    list_display = ['id', 'put_date', 'order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'get_rice_amount',
                     'lux_amount',
                     'lux_price', 'get_lux_amount', 'big_amount', 'big_price', 'get_big_amount', 'other_money',
                     'get_total_amount', 'stock_amount', 'mark']
-    list_display_links = ['put_date']
+    list_display_links = ['id']
     list_per_page = 20
     list_editable = ['order_amount', 'order_price', 'get_rice_ratio', 'get_package', 'lux_amount', 'lux_price',
                      'big_amount', 'big_price', 'other_money', 'stock_amount', 'mark']
@@ -62,12 +62,12 @@ admin.site.register(Rice_buy_order, Rice_Admin)
 class Rice_Sell_Admin(admin.ModelAdmin):
     # 筛选条件
     list_filter = ['put_date', 'get_rice_ratio', 'get_package', 'delivery_co', 'get_pay_status']
-    list_display = ['put_date', 'buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price',
+    list_display = ['id', 'put_date', 'buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price',
                     'get_rice_fee',
                     'delivery_fee', 'get_delivery_fee', 'get_total_fee', 'get_rice_ratio', 'get_package', 'package',
                     'delivery_co',
                     'sign_time', 'get_pay_status', 'mark']
-    list_display_links = ['put_date']
+    list_display_links = ['id']
     list_per_page = 20
     list_editable = ['buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price', 'delivery_fee',
                      'get_rice_ratio',
@@ -873,7 +873,7 @@ def sell_check():
 
 
 class Rice_Bought_Check_Admin(admin.ModelAdmin):
-    list_display = ['id', 'check_month', 'rice_ratio', 'package_type', 'rice_money', 'lux_money', 'big_money',
+    list_display = ['check_month', 'rice_ratio', 'package_type', 'rice_money', 'lux_money', 'big_money',
                     'total_money']
     list_display_links = ['check_month']
     list_per_page = 20
