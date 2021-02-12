@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import django_crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -170,6 +171,6 @@ SIMPLEUI_CONFIG = {
 
 CRONJOBS = {
     # 执行定时器任务
-    ('*/1 * * * *', 'Rice.admin.task')
+    ('*/1 * * * *', 'BigTrader.Rice.admin.task')
 }
 
