@@ -170,6 +170,6 @@ SIMPLEUI_CONFIG = {
 
 CRONJOBS = {
     # 执行定时器任务
-    ('*/1 * * * *', 'Rice.admin.print_test')
+    ('*/1 * * * *', 'Rice.admin.task')
 }
 
