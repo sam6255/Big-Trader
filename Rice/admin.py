@@ -62,7 +62,7 @@ admin.site.register(Rice_buy_order, Rice_Admin)
 class Rice_Sell_Admin(admin.ModelAdmin):
     # 筛选条件
     list_filter = ['put_date', 'get_rice_ratio', 'get_package', 'delivery_co', 'get_pay_status']
-    list_display = ['id', 'put_date', 'buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price',
+    list_display = ['put_date', 'buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price',
                     'get_rice_fee',
                     'delivery_fee', 'get_delivery_fee', 'get_total_fee', 'get_rice_ratio', 'get_package', 'package',
                     'delivery_co',
