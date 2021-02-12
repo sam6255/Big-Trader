@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a259676-21ec-4a2d-83d3-09bc604a923d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rice/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rice/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigTrader/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigTrader/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +108,8 @@
       <workItem from="1613110845482" duration="42000" />
       <workItem from="1613111511431" duration="44000" />
       <workItem from="1613111717063" duration="306000" />
+      <workItem from="1613112171728" duration="17000" />
+      <workItem from="1613112417871" duration="136000" />
     </task>
     <servers />
   </component>
