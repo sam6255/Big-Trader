@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a259676-21ec-4a2d-83d3-09bc604a923d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigTrader/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigTrader/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +102,7 @@
       <workItem from="1613012934770" duration="1624000" />
       <workItem from="1613099819766" duration="189000" />
       <workItem from="1613100022725" duration="71000" />
-      <workItem from="1613100095388" duration="6046000" />
+      <workItem from="1613100095388" duration="6313000" />
     </task>
     <servers />
   </component>

@@ -171,6 +171,6 @@ SIMPLEUI_CONFIG = {
 
 CRONJOBS = {
     # 执行定时器任务
-    ('*/1 * * * *', 'BigTrader.Rice.admin.task')
+    ('*/1 * * * *', 'Rice.admin.task')
 }
 
