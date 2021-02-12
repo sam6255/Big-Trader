@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-=&ffa!@*zg_&7$+si0i%t!^ghi#-6&v=59ox$^h(i!@_^($0%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '81.70.118.232']
 
 import Rice
 
