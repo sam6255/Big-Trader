@@ -7,6 +7,8 @@
     <list default="true" id="8a259676-21ec-4a2d-83d3-09bc604a923d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigTrader/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigTrader/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigTrader/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigTrader/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +71,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="BigTrader.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -102,7 +105,7 @@
       <workItem from="1613012934770" duration="1624000" />
       <workItem from="1613099819766" duration="189000" />
       <workItem from="1613100022725" duration="71000" />
-      <workItem from="1613100095388" duration="1101000" />
+      <workItem from="1613100095388" duration="2701000" />
     </task>
     <servers />
   </component>
