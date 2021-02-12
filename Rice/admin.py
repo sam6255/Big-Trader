@@ -67,7 +67,7 @@ class Rice_Sell_Admin(admin.ModelAdmin):
                     'delivery_fee', 'get_delivery_fee', 'get_total_fee', 'get_rice_ratio', 'get_package', 'package',
                     'delivery_co',
                     'sign_time', 'get_pay_status', 'mark']
-    list_display_links = ['id']
+    list_display_links = ['put_date']
     list_per_page = 20
     list_editable = ['buyer', 'delivery', 'phone', 'add', 'order_amount', 'order_price', 'delivery_fee',
                      'get_rice_ratio',

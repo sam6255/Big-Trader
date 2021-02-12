@@ -174,3 +174,4 @@ CRONJOBS = {
     ('*/1 * * * *', 'Rice.admin.task')
 }
 
+#python3 ~/BigTrader/manage.py runserver 0.0.0.0:8000
