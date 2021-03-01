@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a259676-21ec-4a2d-83d3-09bc604a923d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Rice/migrations/0019_package_type.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigTrader/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigTrader/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rice/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rice/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rice/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rice/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +114,9 @@
       <workItem from="1613111717063" duration="306000" />
       <workItem from="1613112171728" duration="17000" />
       <workItem from="1613112417871" duration="136000" />
+      <workItem from="1614222629533" duration="1722000" />
+      <workItem from="1614390056052" duration="619000" />
+      <workItem from="1614618132311" duration="3311000" />
     </task>
     <servers />
   </component>

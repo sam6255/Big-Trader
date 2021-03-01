@@ -51,6 +51,7 @@ class Rice_buy_order(models.Model):
     # 成本总额元
     stock_amount = models.IntegerField(verbose_name='库存数量(斤)', blank=True, default=0.0)
     mark = models.CharField(verbose_name='备注', max_length=32, blank=True)
+    # 大米包装进货测试
 
     def rice_choice(self):
         return self.get_rice_ratio in {
@@ -162,3 +163,9 @@ class Rice_Sell_Check(models.Model):
         verbose_name = u"销售报表"
         verbose_name_plural = u"销售报表"
 
+class Package_Type(models.Model):
+    type_name = models.CharField(verbose_name='包装分类名称',max_length=16,blank=False)
+
+    class Meta:
+        verbose_name = u"大米分类管理"
+        verbose_name_plural = u"大米分类管理"

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db.models.aggregates import Sum
 from django.forms import widgets
 from Rice.forms import Rice_buy_order_form
-from .models import Rice_buy_order, Rice_sell_order, Rice_Bought_Check, Rice_Stock_Check, Rice_Sell_Check
+from .models import Rice_buy_order, Rice_sell_order, Rice_Bought_Check, Rice_Stock_Check, Rice_Sell_Check, Package_Type
 
 admin.site.site_header = '大米进销存后台'
 admin.site.index_title = '大米进销存后台'
@@ -913,14 +913,14 @@ def task():
     stock_check_admin()
     sell_check()
 
+# 分类选择
+class Package_Type_Admin(admin.ModelAdmin):
+    list_display = ['id', 'type_name']
+    list_display_links = ['id']
+    ordering = ['id']
+
+admin.site.register(Package_Type, Package_Type_Admin)
 
 # 载入/刷新页面时候 加载 bought_check() stock_check_admin() sell_check()看看能不能绑定刷新按钮上
 # 表格宽度调整 颜色调整
 # 软删除改为真删除
-
-num_test = 0
-
-
-def print_test():
-    print(num_test)
-    num_test += 1

@@ -142,7 +142,7 @@ SIMPLEUI_HOME_ACTION = False
 
 SIMPLEUI_CONFIG = {
     'system_keep': False,
-    'menu_display': ['大米进货', '大米出货', '库存统计', '进货统计', '销售统计'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'menu_display': ['大米进货', '大米出货', '库存统计', '进货统计', '销售统计', '分类管理'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'dynamic': True,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [{
         'name': '大米进货',
@@ -164,6 +164,10 @@ SIMPLEUI_CONFIG = {
         'name': '销售统计',
         'icon': 'fas fa-receipt',
         'url': './Rice/rice_sell_check'
+    }, {
+        'name': '分类管理',
+        'icon': 'fas fa-receipt',
+        'url': './Rice/package_type'
     }]
 }
 
