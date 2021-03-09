@@ -13,6 +13,7 @@ class Rice_buy_order(models.Model):
     put_date = models.DateField(verbose_name="日期", blank=True, auto_now_add=True)
     order_amount = models.IntegerField(verbose_name='数量(斤)', blank=True, default=0)
     order_price = models.FloatField(verbose_name='单价(元)', blank=True, default=0)
+    get_package = models.ForeignKey("Package_Type", on_delete=models.CASCADE, default=3, verbose_name='包装种类')
 
     def get_money(order_amount):
         return order_amount
@@ -29,17 +30,6 @@ class Rice_buy_order(models.Model):
         verbose_name='大米比例',
     )
 
-    class PACKAGE_CHOICE(models.TextChoices):
-        GOLDEN = 'GOLDEN', _('金包装')
-        SILVER = 'SILVER', _('银包装')
-        NORMAL = 'NORMAL', _('牛皮纸')
-
-    get_package = models.CharField(
-        max_length=32,
-        choices=PACKAGE_CHOICE.choices,
-        default=PACKAGE_CHOICE.NORMAL,
-        verbose_name='包装种类',
-    )
     # 大米成本价格元
     lux_amount = models.IntegerField(verbose_name='精装盒数量(个)', blank=True, default=0)
     lux_price = models.FloatField(verbose_name='精装和单价(元)', max_length=8, default=0.0)
@@ -58,11 +48,6 @@ class Rice_buy_order(models.Model):
             self.RICE_RATIO.HALF
         }
 
-    def package_choice(self):
-        return self.get_package in {
-            self.PACKAGE_CHOICE.NORMAL
-        }
-
     def __reduce__(self):
         return '增加进货订单成功'
 
@@ -75,8 +60,9 @@ class Rice_sell_order(models.Model):
     add = models.CharField(verbose_name='收货地址', max_length=32, blank=True)
     order_amount = models.IntegerField(verbose_name='数量(斤)', blank=True, default=0)
     order_price = models.FloatField(verbose_name='单价(元)', blank=True, default=0)
+    get_package = models.ForeignKey("Package_Type", on_delete=models.CASCADE, default=3, verbose_name='包装种类')
 
-    # 大米费用外部计算
+# 大米费用外部计算
     delivery_fee = models.FloatField(verbose_name='运费(元/斤)', blank=True, default=0)
     # 总费用外部计算
 
@@ -90,18 +76,6 @@ class Rice_sell_order(models.Model):
         choices=RICE_RATIO.choices,
         default=RICE_RATIO.HALF,
         verbose_name='大米比例',
-    )
-
-    class PACKAGE_CHOICE(models.TextChoices):
-        GOLDEN = 'GOLDEN', _('金包装')
-        SILVER = 'SILVER', _('银包装')
-        NORMAL = 'NORMAL', _('牛皮纸')
-
-    get_package = models.CharField(
-        max_length=32,
-        choices=PACKAGE_CHOICE.choices,
-        default=PACKAGE_CHOICE.NORMAL,
-        verbose_name='包装种类',
     )
 
     package = models.FloatField(verbose_name='件数(个)', blank=True, default=0)

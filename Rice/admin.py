@@ -2,6 +2,7 @@ import datetime
 from django.contrib import admin
 from django.db.models.aggregates import Sum
 from django.forms import widgets
+from django import forms
 from Rice.forms import Rice_buy_order_form
 from .models import Rice_buy_order, Rice_sell_order, Rice_Bought_Check, Rice_Stock_Check, Rice_Sell_Check, Package_Type
 
@@ -9,6 +10,10 @@ admin.site.site_header = '大米进销存后台'
 admin.site.index_title = '大米进销存后台'
 admin.site.site_title = '大米进销存后台'
 
+
+class CustomModelPackageChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return "%s" % (obj.type_name)
 
 class Rice_Admin(admin.ModelAdmin):
     form = Rice_buy_order_form
@@ -48,6 +53,11 @@ class Rice_Admin(admin.ModelAdmin):
 
     def get_total_amount(self, instance):
         return instance.big_amount * instance.big_price + instance.order_amount * instance.order_price + instance.lux_amount * instance.lux_price + instance.other_money
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'get_package':
+            return CustomModelPackageChoiceField(queryset=Package_Type.objects.all())
+        return super(Rice_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     get_total_amount.short_description = u"成本总额(元)"
     get_total_amount.is_column = True
@@ -90,6 +100,11 @@ class Rice_Sell_Admin(admin.ModelAdmin):
 
     def get_total_fee(self, instance):
         return instance.order_amount * instance.order_price + (instance.order_amount * instance.delivery_fee)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'get_package':
+            return CustomModelPackageChoiceField(queryset=Package_Type.objects.all())
+        return super(Rice_Sell_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     get_total_fee.short_description = u'全部费用'
     get_total_fee.is_column = True
