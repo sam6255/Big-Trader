@@ -14,21 +14,10 @@ class Rice_buy_order(models.Model):
     order_amount = models.IntegerField(verbose_name='数量(斤)', blank=True, default=0)
     order_price = models.FloatField(verbose_name='单价(元)', blank=True, default=0)
     get_package = models.ForeignKey("Package_Type", on_delete=models.CASCADE, default=3, verbose_name='包装种类')
+    get_rice_ratio = models.ForeignKey("Package_Ratio", on_delete=models.CASCADE, default=1, verbose_name='大米比例')
 
     def get_money(order_amount):
         return order_amount
-
-    class RICE_RATIO(models.TextChoices):
-        HALF = 'HALF', _('5:5')
-        FOUR = 'FOUR', _('4:6')
-        THREE = 'THREE', _('3:7')
-
-    get_rice_ratio = models.CharField(
-        max_length=32,
-        choices=RICE_RATIO.choices,
-        default=RICE_RATIO.HALF,
-        verbose_name='大米比例',
-    )
 
     # 大米成本价格元
     lux_amount = models.IntegerField(verbose_name='精装盒数量(个)', blank=True, default=0)
@@ -43,11 +32,6 @@ class Rice_buy_order(models.Model):
     mark = models.CharField(verbose_name='备注', max_length=32, blank=True)
     # 大米包装进货测试
 
-    def rice_choice(self):
-        return self.get_rice_ratio in {
-            self.RICE_RATIO.HALF
-        }
-
     def __reduce__(self):
         return '增加进货订单成功'
 
@@ -61,22 +45,11 @@ class Rice_sell_order(models.Model):
     order_amount = models.IntegerField(verbose_name='数量(斤)', blank=True, default=0)
     order_price = models.FloatField(verbose_name='单价(元)', blank=True, default=0)
     get_package = models.ForeignKey("Package_Type", on_delete=models.CASCADE, default=3, verbose_name='包装种类')
+    get_rice_ratio = models.ForeignKey("Package_Ratio", on_delete=models.CASCADE, default=1, verbose_name='大米比例')
 
 # 大米费用外部计算
     delivery_fee = models.FloatField(verbose_name='运费(元/斤)', blank=True, default=0)
     # 总费用外部计算
-
-    class RICE_RATIO(models.TextChoices):
-        HALF = 'HALF', _('5:5')
-        FOUR = 'FOUR', _('4:6')
-        THREE = 'THREE', _('3:7')
-
-    get_rice_ratio = models.CharField(
-        max_length=32,
-        choices=RICE_RATIO.choices,
-        default=RICE_RATIO.HALF,
-        verbose_name='大米比例',
-    )
 
     package = models.FloatField(verbose_name='件数(个)', blank=True, default=0)
     delivery_co = models.CharField(verbose_name='发货物流', max_length=8, blank=True)
@@ -117,9 +90,9 @@ class Rice_Bought_Check(models.Model):
         verbose_name_plural = u"进货报表"
 
 class Rice_Stock_Check(models.Model):
-    stock_rice_ratio = models.CharField(verbose_name='大米比例', max_length=8, blank=True)
     package_type = models.CharField(verbose_name='包装种类', max_length=9, blank=True)
     stock_amount = models.IntegerField(verbose_name='库存剩余', default=0)
+    get_rice_ratio = models.CharField(verbose_name='大米比例', max_length=9, default=1)
 
     class Meta:
         verbose_name = u"库存盘点"
@@ -143,3 +116,10 @@ class Package_Type(models.Model):
     class Meta:
         verbose_name = u"大米分类管理"
         verbose_name_plural = u"大米分类管理"
+
+class Package_Ratio(models.Model):
+    type_name = models.CharField(verbose_name='包装尺寸',max_length=16,blank=False)
+
+    class Meta:
+        verbose_name = u"大米包装尺寸管理"
+        verbose_name_plural = u"大米包装尺寸管理"

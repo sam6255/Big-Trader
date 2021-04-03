@@ -4,7 +4,9 @@ from django.db.models.aggregates import Sum
 from django.forms import widgets
 from django import forms
 from Rice.forms import Rice_buy_order_form
-from .models import Rice_buy_order, Rice_sell_order, Rice_Bought_Check, Rice_Stock_Check, Rice_Sell_Check, Package_Type
+from .RawChangeList import RawChangeList
+from .models import Rice_buy_order, Rice_sell_order, Rice_Bought_Check, Rice_Stock_Check, Rice_Sell_Check, Package_Type, \
+    Package_Ratio
 
 admin.site.site_header = '大米进销存后台'
 admin.site.index_title = '大米进销存后台'
@@ -57,6 +59,8 @@ class Rice_Admin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'get_package':
             return CustomModelPackageChoiceField(queryset=Package_Type.objects.all())
+        if db_field.name == 'get_rice_ratio':
+            return CustomModelPackageChoiceField(queryset=Package_Ratio.objects.all())
         return super(Rice_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     get_total_amount.short_description = u"成本总额(元)"
@@ -104,6 +108,8 @@ class Rice_Sell_Admin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'get_package':
             return CustomModelPackageChoiceField(queryset=Package_Type.objects.all())
+        if db_field.name == 'get_rice_ratio':
+            return CustomModelPackageChoiceField(queryset=Package_Ratio.objects.all())
         return super(Rice_Sell_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     get_total_fee.short_description = u'全部费用'
@@ -175,10 +181,8 @@ def stock_check_admin():
 
 
 class Rice_Stock_Check_Admin(admin.ModelAdmin):
-    list_display = ['stock_rice_ratio', 'package_type', 'stock_amount']
-    list_display_links = ['stock_rice_ratio']
-    list_per_page = 20
-    ordering = ['id']
+    list_display = ['get_rice_ratio', 'package_type', 'stock_amount']
+    # list_display_links = ['stock_rice_ratio']
 
     def has_add_permission(self, request):
         return False
@@ -186,7 +190,19 @@ class Rice_Stock_Check_Admin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+    def get_changelist(self, request, **kwargs):
+        return RawChangeList
+    
+    def get_queryset(self, request):
+        return Rice_Stock_Check.objects.raw('select a.id, c.type_name get_rice_ratio,d.type_name package_type,ifnull(a.order_amount-b.order_amount, 0) stock_amount from (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_buy_order a group by a.get_rice_ratio_id,a.get_package_id) a left join (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_sell_order a group by a.get_rice_ratio_id,a.get_package_id) b on b.get_rice_ratio_id=a.get_rice_ratio_id and b.get_package_id=a.get_package_id left join Rice_package_ratio c on c.id=a.get_rice_ratio_id left join Rice_package_type d on d.id=a.get_package_id')
 
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     if db_field.name == 'get_rice_ratio':
+    #         return CustomModelPackageChoiceField(queryset=Package_Ratio.objects.all())
+    #     return super(Rice_Stock_Check_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_object(self, request, object_id, from_field=None):
+        return ''
 admin.site.register(Rice_Stock_Check, Rice_Stock_Check_Admin)
 
 
