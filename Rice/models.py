@@ -111,6 +111,7 @@ class Rice_Sell_Check(models.Model):
         verbose_name_plural = u"销售报表"
 
 class Package_Type(models.Model):
+    # id =   models.AutoField(primary_key=True, verbose_name='包装')
     type_name = models.CharField(verbose_name='包装分类名称',max_length=16,blank=False)
 
     class Meta:
