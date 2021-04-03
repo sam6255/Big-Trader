@@ -111,8 +111,10 @@ class Rice_Sell_Check(models.Model):
         verbose_name_plural = u"销售报表"
 
 class Package_Type(models.Model):
-    # id =   models.AutoField(primary_key=True, verbose_name='包装')
     type_name = models.CharField(verbose_name='包装分类名称',max_length=16,blank=False)
+
+    def __str__(self):
+        return self.type_name
 
     class Meta:
         verbose_name = u"大米分类管理"
@@ -120,6 +122,9 @@ class Package_Type(models.Model):
 
 class Package_Ratio(models.Model):
     type_name = models.CharField(verbose_name='包装尺寸',max_length=16,blank=False)
+
+    def __str__(self):
+        return self.type_name
 
     class Meta:
         verbose_name = u"大米包装尺寸管理"
