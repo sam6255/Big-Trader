@@ -194,7 +194,7 @@ class Rice_Stock_Check_Admin(admin.ModelAdmin):
         return RawChangeList
 
     def get_queryset(self, request):
-        return Rice_Stock_Check.objects.raw('select a.id, c.type_name get_rice_ratio,d.type_name package_type,ifnull(a.order_amount-b.order_amount, 0) stock_amount from (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_buy_order a group by a.get_rice_ratio_id,a.get_package_id) a left join (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_sell_order a group by a.get_rice_ratio_id,a.get_package_id) b on b.get_rice_ratio_id=a.get_rice_ratio_id and b.get_package_id=a.get_package_id left join Rice_package_ratio c on c.id=a.get_rice_ratio_id left join Rice_package_type d on d.id=a.get_package_id')
+        return Rice_Stock_Check.objects.raw('select a.id, c.type_name get_rice_ratio,d.type_name package_type,ifnull(a.order_amount, 0) - ifnull(b.order_amount, 0) stock_amount from (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_buy_order a group by a.get_rice_ratio_id,a.get_package_id) a left join (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_sell_order a group by a.get_rice_ratio_id,a.get_package_id) b on b.get_rice_ratio_id=a.get_rice_ratio_id and b.get_package_id=a.get_package_id left join Rice_package_ratio c on c.id=a.get_rice_ratio_id left join Rice_package_type d on d.id=a.get_package_id')
 
     # def formfield_for_foreignkey(self, db_field, request, **kwargs):
     #     if db_field.name == 'get_rice_ratio':
@@ -223,7 +223,7 @@ class Rice_Bought_Check_Admin(admin.ModelAdmin):
         return RawChangeList
 
     def get_queryset(self, request):
-        return Rice_Stock_Check.objects.raw('select max(a.id) id, a.put_date check_month, b.type_name rice_ratio, c.type_name package_type, sum(a.order_amount) rice_money,  sum(a.lux_amount) lux_money, sum(a.big_amount) big_money, sum(a.order_amount +a.lux_amount +  a.big_amount) total_money from Rice_rice_buy_order a join rice_package_ratio b on b.id=a.get_rice_ratio_id join rice_package_type c on c.id=a.get_package_id group by a.put_date,a.get_rice_ratio_id,a.get_package_id order by a.put_date desc')
+        return Rice_Stock_Check.objects.raw('select max(a.id) id, a.put_date check_month, b.type_name rice_ratio, c.type_name package_type, sum(ifnull(a.order_amount, 0)) rice_money,  sum(ifnull(a.lux_amount, 0)) lux_money, sum(ifnull(a.big_amount, 0)) big_money, sum(ifnull(a.order_amount, 0) + ifnull(a.lux_amount, 0) +  ifnull(a.big_amount, 0)) total_money from Rice_rice_buy_order a join rice_package_ratio b on b.id=a.get_rice_ratio_id join rice_package_type c on c.id=a.get_package_id group by a.put_date,a.get_rice_ratio_id,a.get_package_id order by a.put_date desc')
 
     def get_object(self, request, object_id, from_field=None):
         return ''
@@ -244,7 +244,7 @@ class Rice_Sell_Check_Admin(admin.ModelAdmin):
         return RawChangeList
 
     def get_queryset(self, request):
-        return Rice_Stock_Check.objects.raw('select max(a.id) id, a.put_date check_month, b.type_name rice_ratio, c.type_name package_type, sum(a.order_amount) rice_money,  sum(a.delivery_fee) delivery_money,  sum(a.order_amount +a.delivery_fee ) total_money from rice_rice_sell_order a join rice_package_ratio b on b.id=a.get_rice_ratio_id join rice_package_type c on c.id=a.get_package_id group by a.put_date,a.get_rice_ratio_id,a.get_package_id order by a.put_date desc')
+        return Rice_Stock_Check.objects.raw('select max(a.id) id, a.put_date check_month, b.type_name rice_ratio, c.type_name package_type, sum(ifnull(a.order_amount, 0)) rice_money,  sum(ifnull(a.delivery_fee, 0)) delivery_money,  sum(ifnull(a.order_amount, 0) + ifnull(a.delivery_fee, 0) ) total_money from rice_rice_sell_order a join rice_package_ratio b on b.id=a.get_rice_ratio_id join rice_package_type c on c.id=a.get_package_id group by a.put_date,a.get_rice_ratio_id,a.get_package_id order by a.put_date desc')
 
     def get_object(self, request, object_id, from_field=None):
         return ''
