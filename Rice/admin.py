@@ -194,7 +194,7 @@ class Rice_Stock_Check_Admin(admin.ModelAdmin):
         return RawChangeList
 
     def get_queryset(self, request):
-        return Rice_Stock_Check.objects.raw('select a.id, c.type_name get_rice_ratio,d.type_name package_type,ifnull(a.order_amount, 0) - ifnull(b.order_amount, 0) stock_amount from (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_buy_order a group by a.get_rice_ratio_id,a.get_package_id) a left join (select id,order_amount,get_rice_ratio_id,get_package_id from Rice_rice_sell_order a group by a.get_rice_ratio_id,a.get_package_id) b on b.get_rice_ratio_id=a.get_rice_ratio_id and b.get_package_id=a.get_package_id left join Rice_package_ratio c on c.id=a.get_rice_ratio_id left join Rice_package_type d on d.id=a.get_package_id')
+        return Rice_Stock_Check.objects.raw('select a.id, c.type_name get_rice_ratio,d.type_name package_type,ifnull(a.order_amount, 0) - ifnull(b.order_amount, 0) stock_amount from (select id,sum(ifnull(order_amount, 0)) order_amount,get_rice_ratio_id,get_package_id from Rice_rice_buy_order a group by a.get_rice_ratio_id,a.get_package_id) a left join (select id,sum(ifnull(order_amount, 0)) order_amount,get_rice_ratio_id,get_package_id from Rice_rice_sell_order a group by a.get_rice_ratio_id,a.get_package_id) b on b.get_rice_ratio_id=a.get_rice_ratio_id and b.get_package_id=a.get_package_id left join Rice_package_ratio c on c.id=a.get_rice_ratio_id left join Rice_package_type d on d.id=a.get_package_id')
 
     # def formfield_for_foreignkey(self, db_field, request, **kwargs):
     #     if db_field.name == 'get_rice_ratio':
